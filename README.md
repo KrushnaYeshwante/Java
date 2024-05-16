@@ -2,7 +2,7 @@ Sudoku solver java program
 <br>
 Made by : Krushna Yeshwnate
 <br>
-This repository contains some simple Java programs :
+This repository contains Java programs of task given by PRODIGY INFOTECH as part of the internship program, it was great experience to learn with PRODIGY. The tasks are as follows -
 <br>
 Task 1 : Build a Temperature Conversion Program
 <br>
