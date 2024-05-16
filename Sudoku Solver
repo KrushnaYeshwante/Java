@@ -1,0 +1,89 @@
+public class SudokuSolver {
+    public static boolean solveSudoku(int[][] board) {
+        int N = board.length;
+        int[] emptyCell = findEmptyCell(board);
+        
+        if (emptyCell == null) {
+            return true; 
+        }
+        
+        int row = emptyCell[0];
+        int col = emptyCell[1];
+        
+        for (int num = 1; num <= N; num++) {
+            if (isValid(board, row, col, num)) {
+                board[row][col] = num;
+                
+                if (solveSudoku(board)) {
+                    return true; 
+                }
+                
+                board[row][col] = 0; 
+            }
+        }
+        
+        return false; 
+    }
+    public static boolean isValid(int[][] board, int row, int col, int num) {
+        int N = board.length;
+        for (int i = 0; i < N; i++) {
+            if (board[row][i] == num || board[i][col] == num) {
+                return false;
+            }
+        }
+        int boxStartRow = row - row % 3;
+        int boxStartCol = col - col % 3;
+        
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                if (board[boxStartRow + i][boxStartCol + j] == num) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+    public static int[] findEmptyCell(int[][] board) {
+        int N = board.length;
+        
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < N; j++) {
+                if (board[i][j] == 0) {
+                    return new int[]{i, j}; 
+                }
+            }
+        }
+        return null; 
+    }
+    public static void printBoard(int[][] board) {
+        int N = board.length;
+        
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < N; j++) {
+                System.out.print(board[i][j] + " ");
+            }
+            System.out.println();
+        }
+    }
+    
+    public static void main(String[] args) {
+        int[][] board = {
+            {7, 0, 0, 0, 0, 0, 2, 0, 0},
+            {4, 0, 2, 0, 0, 0, 0, 0, 3},
+            {0, 0, 0, 2, 0, 1, 0, 0, 0},
+            {3, 0, 0, 1, 8, 0, 0, 9, 7},
+            {0, 0, 9, 0, 7, 0, 6, 0, 0},
+            {6, 5, 0, 0, 3, 2, 0, 0, 1},
+            {0, 0, 0, 4, 0, 9, 0, 0, 0},
+            {5, 0, 0, 0, 0, 0, 1, 0, 6},
+            {0, 0, 6, 0, 0, 0, 0, 0, 8}
+        };
+        
+        if (solveSudoku(board)) {
+            System.out.println("Sudoku solved:");
+            printBoard(board);
+        } else {
+            System.out.println("No solution exists.");
+        }
+    }
+}
