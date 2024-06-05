@@ -7,7 +7,7 @@ public class GuessingGame {
         Random random = new Random();
         
         int lowerBound = 1;
-        int upperBound = 100;
+        int upperBound = 50;
         int targetNumber = random.nextInt(upperBound - lowerBound + 1) + lowerBound;
         
         System.out.println("Welcome to the Guessing Game!");
